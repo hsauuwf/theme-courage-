@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>20/10 — Món quà dành cho cậu</title>
+<!-- FILE HOÀN CHỈNH: nhạc nền để trống để bạn tự thêm trong phần CẤU HÌNH bên dưới. -->
+<style>
+/* ===== CHỈNH GIAO DIỆN: đổi màu/font tại các biến dưới đây ===== */
+:root{--pink:#bd5c7b;--pink-dark:#a94768;--cream:#fff8f4;--ink:#613b48;--border:#efd0d9;--body:Arial,sans-serif;--title:Georgia,serif}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body)}button,input{font:inherit}button{cursor:pointer;border:0;border-radius:999px;padding:13px 20px;background:var(--pink);color:#fff;font-weight:700;transition:.2s}button:hover{filter:brightness(.96)}button:focus-visible,input:focus-visible{outline:3px solid #b44d6d;outline-offset:3px}.secondary{background:#f2dce3;color:#754456}.small{padding:10px 13px;font-size:12px}.app{min-height:100vh;padding:22px 14px 38px;background:radial-gradient(ellipse at top,#ffebf0,var(--cream) 60%,#fff0e5)}.screen{display:none;max-width:850px;margin:auto}.screen.active{display:block}.panel{background:#fffdfbf2;border:1px solid var(--border);border-radius:25px;padding:clamp(20px,5vw,40px);box-shadow:0 18px 50px #a64e6812}.center{text-align:center}.eyebrow{color:#aa7184;text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:bold}h1,h2,h3{font-family:var(--title);font-weight:normal}h1{color:var(--pink-dark);font-size:clamp(35px,7vw,53px);line-height:1.12;margin:15px 0}h2{color:var(--pink-dark);font-size:clamp(27px,5vw,36px);margin:10px 0}.lead{max-width:520px;margin:0 auto 24px;color:#987582;font-size:14px;line-height:1.8}.flower-mark{font-size:54px;margin-bottom:16px}.note{color:#a17d89;font-size:12px;line-height:1.7;margin-top:18px}.error{min-height:20px;color:#b23b5d;font-size:12px;margin-top:9px}
+/* [MẬT KHẨU PIN] Giao diện nhập mã số kiểu iPhone: chấm PIN + bàn phím số */
+.pin-area{max-width:300px;margin:30px auto 18px}.pin-label{font-size:14px;color:#8c6876;margin-bottom:18px}.pin-dots{display:flex;justify-content:center;gap:16px;margin:0 auto 27px;min-height:16px}.pin-dot{width:13px;height:13px;border:1.5px solid #bd5c7b;border-radius:50%;background:transparent}.pin-dot.filled{background:#bd5c7b}.pin-keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 20px;max-width:260px;margin:0 auto}.pin-key{width:66px;height:66px;margin:auto;border-radius:50%;background:#f4e8ec;color:#5f3c49;font-size:25px;font-weight:500;padding:0;border:1px solid #efd5de;box-shadow:0 2px 0 #e8ccd5}.pin-key:active{background:#e9cbd6;transform:scale(.96)}.pin-key.utility{background:transparent;border-color:transparent;box-shadow:none;font-size:13px}.pin-key.empty{visibility:hidden}.pin-error{min-height:20px;color:#b23b5d;font-size:12px;margin-top:17px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px;color:#946d7b;font-size:12px}.flower-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}.flower-option{color:var(--ink);background:white;border:1px solid var(--border);border-radius:18px;padding:15px 10px;text-align:center;box-shadow:none;transform:none;min-width:0}.flower-option.selected{border:2px solid var(--pink);background:#fff0f4;box-shadow:0 5px 18px #d85e7e18}.flower-option .emoji{display:block;font-size:39px;margin-bottom:7px}.flower-option .fname{font-weight:bold;font-size:14px}.flower-option .desc{color:#9c7784;font-size:11px;line-height:1.5;margin:6px 0 10px}.pick{font-size:12px;color:var(--pink-dark)}
+/* [ẢNH BÓ HOA HOÀN CHỈNH] Mỗi loài hoa dùng một ảnh riêng. Kích thước tối đa 320x350px, tự co theo màn hình. */
+.bouquet-stage{min-height:300px;display:flex;align-items:center;justify-content:center;text-align:center;border-radius:20px;border:1px dashed #e5adbd;background:linear-gradient(160deg,#fff5f7,#fbe4eb);padding:18px;overflow:hidden}.bouquet-photo{display:block;width:100%;max-width:320px;max-height:350px;height:auto;object-fit:contain;margin:0 auto;border-radius:14px;filter:drop-shadow(0 8px 12px #7d425522)}.bouquet-placeholder{padding:30px 12px;color:#987582}.bouquet-placeholder .big-flower{display:block;font-size:70px;margin-bottom:10px}.bouquet-title{font-family:var(--title);font-size:25px;color:var(--pink-dark);margin-top:12px}.bouquet-subtitle{color:#987582;font-size:13px;margin-top:7px;line-height:1.7}.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:18px}
+/* [ẢNH LỜI CHÚC] Ảnh đặt phía trên tiêu đề; tối đa cao 420px, giữ nguyên tỉ lệ, không cắt ảnh. */
+.gift-photo{margin:22px auto 24px;min-height:0;max-width:620px;max-height:440px;border-radius:18px;overflow:hidden;background:#fbe5ec;border:1px solid var(--border);display:grid;place-items:center}.gift-photo img{display:block;width:100%;max-width:100%;max-height:420px;height:auto;object-fit:contain;margin:0 auto}.placeholder{text-align:center;padding:25px;color:#987582}.placeholder span{display:block;font-size:66px;margin-bottom:8px}.wish{background:#fff2f5;border:1px solid #f2d5de;border-radius:18px;padding:clamp(20px,5vw,32px);line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere}.wish h3{color:var(--pink-dark);font-size:clamp(27px,5vw,34px);line-height:1.4;margin:0 0 14px}.wish-body{font-family:var(--title);font-size:18px}.signature{color:#b16c83;text-align:right;font-style:italic;margin-top:18px}.music-box{margin:18px auto 8px;max-width:420px;padding:14px;border:1px solid var(--border);border-radius:16px;background:#fff6f8;text-align:center}.music-label{font-size:12px;color:#987582;margin-bottom:10px}.music-toggle{min-width:170px}.music-status{min-height:18px;margin-top:8px;font-size:11px;color:#987582}.footer{text-align:center;color:#b28b98;font-size:11px;margin-top:22px}
+@media(min-width:650px){.flower-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:420px){.panel{padding:20px 16px}.bouquet-stage{padding:12px}}
+</style></head>
+<body><main class="app">
+<!-- MỤC 1: MÀN HÌNH MẬT KHẨU. Không có bảng chỉnh sửa trên trang; sửa trong phần CẤU HÌNH ở cuối file. -->
+<section class="screen active" id="lockScreen"><div class="panel center"><div class="flower-mark" aria-hidden="true">💌</div><div class="eyebrow">ba pu cụt cưn </div><h1 id="lockTitle"></h1><p class="lead" id="lockMessage"></p><div class="pin-area" aria-label="Bàn phím nhập mã PIN">
+<div class="pin-label">Nhập mã PIN</div>
+<div class="pin-dots" id="pinDots" aria-label="Số ký tự đã nhập"></div>
+<div class="pin-keypad" id="pinKeypad">
+<button class="pin-key" type="button" data-digit="1">1</button><button class="pin-key" type="button" data-digit="2">2</button><button class="pin-key" type="button" data-digit="3">3</button>
+<button class="pin-key" type="button" data-digit="4">4</button><button class="pin-key" type="button" data-digit="5">5</button><button class="pin-key" type="button" data-digit="6">6</button>
+<button class="pin-key" type="button" data-digit="7">7</button><button class="pin-key" type="button" data-digit="8">8</button><button class="pin-key" type="button" data-digit="9">9</button>
+<button class="pin-key utility" type="button" id="pinClear">Xóa</button><button class="pin-key" type="button" data-digit="0">0</button><button class="pin-key utility" type="button" id="pinDelete">⌫</button>
+</div><div class="pin-error" id="passwordError" aria-live="polite"></div>
+</div><button id="unlockBtn">dành riêng cho hằng húi </button><p class="note">Nhập ngày tháng sinh của em vào đii </p></div></section>
+<!-- MỤC 2: CHỌN MỘT LOÀI HOA. Màn hình này chỉ dùng để chọn, không hiển thị bó hoa hay lời chúc. -->
+<section class="screen" id="flowerScreen"><div class="topbar"><span> · CHỌN LOÀI HOA</span><button class="secondary small" id="backLock">← Quay lại</button></div><div class="panel"><div class="center"><div class="eyebrow">ài ố sì mà</div><h2>Chọn hoa hằn thích đi</h2><p class="lead">Chỉ chọn được một loài hoa thui nha hihi 💐</p></div><div class="flower-grid" id="flowerGrid"></div><div class="actions"><button id="finishSelection">Hoàn thành bó hoa →</button></div></div></section>
+<!-- MỤC 3: BÓ HOA HOÀN CHỈNH, TÁCH RIÊNG KHỎI MỤC CHỌN HOA VÀ LỜI CHÚC. -->
+<section class="screen" id="bouquetScreen"><div class="topbar"><span> · BÓ HOA SIU ĐỆP</span><button class="secondary small" id="backFlowers">← Đổi loài hoa</button></div><div class="panel"><div class="center"><div class="eyebrow">ai hỏii</div><h2>Chọn hoa gi xáu dữ -))</h2><p class="lead">Bó hoa dành riêng cho hằn ahihi 🌷</p></div><div class="bouquet-stage"><div style="width:100%"><div id="bouquetImageArea"><div class="bouquet-placeholder"><span class="big-flower" id="bouquetFallback">💐</span><b>Ảnh bó hoa sẽ hiện ở đây</b><div style="font-size:12px;margin-top:8px">Thêm đường dẫn ảnh vào mục bouquetImage trong phần CẤU HÌNH.</div></div></div><div class="bouquet-title" id="bouquetName"></div><div class="bouquet-subtitle" id="bouquetDescription"></div></div></div><div class="actions"><button id="finishBouquet">♡</button></div></div></section>
+<!-- MỤC 4: ẢNH RIÊNG HIỆN TRÊN TIÊU ĐỀ "CHÚC MỪNG NGÀY 20/10!". Chỉnh GIFT_IMAGE_URL trong phần CẤU HÌNH. -->
+<section class="screen" id="giftScreen"><div class="topbar"><span>MÓN QUÀ 20/10 · DÀNH RIÊNG CHO CẬU</span><button class="secondary small" id="backBouquet">← Đổi bó hoa</button></div><div class="panel"><div class="center"><div class="eyebrow">huy qua ngàu kakaka</div><h2 id="giftHeading"></h2><p class="lead">Mong hằn mãi dịu dàng như những cánh hoa này. 🌸</p></div><div class="gift-photo" id="giftPhoto"></div><article class="wish"><h3 id="wishTitle"></h3><div class="wish-body" id="wishBody"></div><div class="signature" id="wishSign"></div></article><!-- NHẠC NỀN CHỈ CÓ Ở MỤC 4. Khi rời màn hình lời chúc, nhạc sẽ dừng. -->
+<div class="music-box" id="giftMusicBox"><div class="music-label">♫ Một chút nhạc dành riêng cho cậu</div><button type="button" class="secondary music-toggle" id="musicToggle">▶ Bật nhạc nền</button><div class="music-status" id="musicStatus" aria-live="polite">Thêm đường dẫn nhạc trong phần CẤU HÌNH.</div></div><audio id="giftMusic" loop preload="none"></audio>
+<div class="actions"><button id="celebrate">Nhấn nhìu vô cho đệp 💗</button></div><p class="footer">Made with qhuydeptraisieucap ♡ ·</p></div></section>
+<div id="hearts" aria-hidden="true"></div></main>
+<script>
+/* ==================================================================
+   CẤU HÌNH CHỈNH SỬA — sửa nội dung ở đây, không cần sửa UI.
+
+   [1] SITE_PASSWORD: mã PIN số mở web.
+   [2] LOCK_TITLE / LOCK_MESSAGE: tiêu đề và lời nhắn màn hình đầu.
+   [3] FLOWERS: danh sách loài hoa.
+       - name: tên loài hoa; emoji: biểu tượng trong danh sách chọn;
+         description: mô tả.
+       - bouquetImage: URL hoặc đường dẫn TƯƠNG ĐỐI tới MỘT ẢNH BÓ HOA HOÀN CHỈNH.
+         Ví dụ "images/tulip.jpg". Đặt thư mục images cạnh file HTML.
+         Mỗi loài hoa dùng một ảnh riêng; không cần tách ảnh thành nhiều phần.
+   [4] GIFT_IMAGE_URL: ảnh riêng ở màn hình lời chúc, nằm phía trên tiêu đề.
+       Nếu để trống, màn hình lời chúc sẽ dùng ảnh bó hoa của loài đã chọn.
+   [5] GIFT_HEADING: tiêu đề nhỏ phía trên ảnh.
+   [6] WISH_TITLE / WISH_BODY / WISH_SIGNATURE: tiêu đề, nội dung, chữ ký.
+   [7] NHẠC NỀN — CHỈ PHÁT Ở MỤC 4 (ẢNH VÀ LỜI CHÚC).
+       Bạn tự thêm nhạc sau; mặc định để trống nên web KHÔNG phát nhạc.
+       Cách A: đặt file nhạc cạnh HTML trong thư mục music, ví dụ music/nhac.mp3
+         rồi sửa: const BACKGROUND_MUSIC_URL = "music/nhac.mp3";
+       Cách B: dùng URL trực tiếp tới file âm thanh, ví dụ URL kết thúc bằng .mp3.
+       Đổi âm lượng ở BACKGROUND_MUSIC_VOLUME: 0 = tắt, 1 = tối đa.
+       Nút bật/tạm dừng nhạc chỉ xuất hiện trong MỤC 4. Rời mục 4 nhạc sẽ dừng.
+       Điện thoại có thể chặn tự phát; nếu vậy hãy chạm nút Bật nhạc nền.
+       Dùng MP3 hoặc OGG và chỉ dùng nhạc bạn có quyền sử dụng.
+   [8] MÀU SẮC / FONT: biến CSS --pink, --cream, --ink, --border, --body, --title.
+
+   ẢNH: có thể dùng URL https://... hoặc đường dẫn tương đối như images/tulip.jpg.
+   Nếu dùng đường dẫn tương đối, đặt thư mục images cạnh file HTML và giữ đúng tên ảnh.
+   NHẠC: nếu dùng đường dẫn tương đối, đặt thư mục music cạnh file HTML.
+   Mã PIN trong HTML chỉ là khoá vui, không phải bảo mật thật.
+   ================================================================== */
+const SITE_PASSWORD = "2904"; // [1] MẬT KHẨU PIN
+const LOCK_TITLE = "Cục sì lầu um bê lắp"; // [2] TIÊU ĐỀ MỞ ĐẦU
+const LOCK_MESSAGE = "Nhập mật khẩu bí mật để mở quà 20/10 nha voo 🌷"; // [2] LỜI NHẮN MỞ ĐẦU
+const FLOWERS = [ // [3] MỖI LOÀI CÓ MỘT ẢNH BÓ HOA HOÀN CHỈNH
+ {id:"tulip",name:"Tulip",emoji:"🌷",description:"Dịu dàng, tinh tế và đầy yêu thương.",bouquetImage:"https://pin.it/1FakqOoRC"},
+ {id:"rose",name:"Hoa hồng",emoji:"🌹",description:"Tượng trưng cho sự yêu thương và trân trọng.",bouquetImage:"images/rose.jpg"},
+ {id:"sunflower",name:"Hướng dương",emoji:"🌻",description:"Mang theo nắng ấm và những điều tích cực.",bouquetImage:"images/sunflower.jpg"},
+ {id:"lily",name:"Hoa ly",emoji:"💮",description:"Thanh lịch và trang nhã.",bouquetImage:"images/lily.jpg"},
+ {id:"chrysanthemum",name:"Cúc họa mi",emoji:"🌼",description:"Nhẹ nhàng, ngọt ngào và trong trẻo.",bouquetImage:"images/chrysanthemum.jpg"},
+ {id:"baby",name:"Baby",emoji:"💐",description:"Nhỏ xinh, mong manh và đầy yêu thương.",bouquetImage:"images/baby.jpg"}
+];
+const GIFT_IMAGE_URL = ""; // [4] ẢNH RIÊNG PHÍA TRÊN LỜI CHÚC; để trống sẽ dùng ảnh bó hoa đã chọn
+const GIFT_HEADING = "Yee"; // [5] TIÊU ĐỀ PHÍA TRÊN ẢNH
+const WISH_TITLE = "20/10 vui vẻ nhoo !"; // [6] TIÊU ĐỀ LỜI CHÚC
+const WISH_BODY = "Chúc hằn 20/10 vuôi vẻ , xênh gái kuteo họt giổi , nét hơn con mình ghét 🥵🥵😈😈 !!! ĐẶC BIỆC là iu tui hơn nhâ hí hí 😘🍌 , tuy khôm có quà nhưn mầ tui chúc văy mong hằng vui aa 🪝🦋🪝🦋"; // [6] NỘI DUNG LỜI CHÚC
+const WISH_SIGNATURE = "iu voo nhìuu ứ hự~ ♡"; // [6] CHỮ KÝ
+const BACKGROUND_MUSIC_URL = ""; // [7] DÁN URL NHẠC HOẶC ĐƯỜNG DẪN FILE VÀO ĐÂY; để trống nếu chưa thêm nhạc
+const BACKGROUND_MUSIC_VOLUME = 0.35; // [7] ÂM LƯỢNG: 0.0 = im lặng, 1.0 = tối đa
+
+let selectedFlower = FLOWERS[0].id;
+const $ = id => document.getElementById(id);
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));window.scrollTo({top:0,behavior:'smooth'});}
+function validImage(url){return typeof url==='string' && /^https?:\/\//i.test(url.trim()) ? url.trim() : '';}
+function setImage(id,url,alt){const img=$(id),src=validImage(url);img.onerror=()=>{img.removeAttribute('src');img.style.display='none';};if(src){img.src=src;img.alt=alt;img.style.display='block';}else{img.removeAttribute('src');img.style.display='none';}}
+function renderFlowers(){
+ const chosen=FLOWERS.find(f=>f.id===selectedFlower)||FLOWERS[0];
+ $('flowerGrid').innerHTML=FLOWERS.map(f=>`<button type="button" class="flower-option ${f.id===selectedFlower?'selected':''}" data-id="${f.id}"><span class="emoji">${f.emoji}</span><span class="fname">${f.name}</span><div class="desc">${f.description}</div><span class="pick">${f.id===selectedFlower?'✓ Đang chọn':'Chọn loài hoa'}</span></button>`).join('');
+ $('flowerGrid').querySelectorAll('[data-id]').forEach(b=>b.addEventListener('click',()=>{selectedFlower=b.dataset.id;renderFlowers();}));
+}
+function imageSource(url){if(typeof url!=="string")return "";const value=url.trim();return (/^https?:\/\//i.test(value)||/^(\.\.?\/|images\/|music\/)/i.test(value))?value:"";}
+function renderBouquet(){
+ const chosen=FLOWERS.find(f=>f.id===selectedFlower)||FLOWERS[0];
+ const area=$("bouquetImageArea");
+ const src=imageSource(chosen.bouquetImage);
+ area.innerHTML="";
+ if(src){
+   const img=document.createElement("img");img.className="bouquet-photo";img.src=src;img.alt="Bó hoa "+chosen.name;
+   img.onerror=()=>{area.innerHTML=`<div class="bouquet-placeholder"><span class="big-flower">${chosen.emoji}</span><b>Chưa tải được ảnh bó ${chosen.name.toLowerCase()}</b><div style="font-size:12px;margin-top:8px">Kiểm tra đường dẫn bouquetImage trong phần CẤU HÌNH.</div></div>`;};
+   area.appendChild(img);
+ }else{
+   area.innerHTML=`<div class="bouquet-placeholder"><span class="big-flower">${chosen.emoji}</span><b>Chưa thêm ảnh bó ${chosen.name.toLowerCase()}</b><div style="font-size:12px;margin-top:8px">Điền đường dẫn ảnh tại bouquetImage của loài hoa này.</div></div>`;
+ }
+ $("bouquetName").textContent="Bó "+chosen.name.toLowerCase();
+ $("bouquetDescription").textContent=chosen.description;
+}
+function renderGiftPhoto(){
+ const f=FLOWERS.find(x=>x.id===selectedFlower)||FLOWERS[0],box=$("giftPhoto");box.innerHTML="";
+ const src=imageSource(GIFT_IMAGE_URL)||imageSource(f.bouquetImage);
+ if(src){const img=document.createElement("img");img.src=src;img.alt=GIFT_IMAGE_URL?"Ảnh chúc mừng ngày 20/10":"Bó hoa "+f.name;img.onerror=()=>{box.innerHTML=`<div class="placeholder"><span>${f.emoji}</span>Ảnh chưa tải được. Kiểm tra đường dẫn ảnh trong phần CẤU HÌNH.</div>`;};box.appendChild(img);}
+ else{box.innerHTML=`<div class="placeholder"><span>${f.emoji}</span>Thêm ảnh tại bouquetImage hoặc GIFT_IMAGE_URL trong phần CẤU HÌNH.</div>`;}
+}
+$('lockTitle').textContent=LOCK_TITLE;$('lockMessage').textContent=LOCK_MESSAGE;$('giftHeading').textContent=GIFT_HEADING;$('wishTitle').textContent=WISH_TITLE;$('wishBody').textContent=WISH_BODY;$('wishSign').textContent=WISH_SIGNATURE;
+let enteredPin='';
+function pinLength(){return String(SITE_PASSWORD).length;}
+function renderPinDots(){
+ const dots=$('pinDots');dots.innerHTML='';
+ for(let i=0;i<pinLength();i++){const dot=document.createElement('span');dot.className='pin-dot'+(i<enteredPin.length?' filled':'');dots.appendChild(dot);}
+}
+function tryUnlock(){
+ if(enteredPin===String(SITE_PASSWORD)){
+  $('passwordError').textContent='';enteredPin='';renderPinDots();renderFlowers();showScreen('flowerScreen');
+ }else{
+  $('passwordError').textContent='Mã PIN chưa đúng, thử lại nhé ♡';enteredPin='';renderPinDots();
+ }
+}
+$('pinKeypad').querySelectorAll('[data-digit]').forEach(btn=>btn.addEventListener('click',()=>{
+ if(enteredPin.length<pinLength()){enteredPin+=btn.dataset.digit;renderPinDots();if(enteredPin.length===pinLength())setTimeout(tryUnlock,180);}
+}));
+$('pinDelete').addEventListener('click',()=>{enteredPin=enteredPin.slice(0,-1);$('passwordError').textContent='';renderPinDots();});
+$('pinClear').addEventListener('click',()=>{enteredPin='';$('passwordError').textContent='';renderPinDots();});
+$('unlockBtn').addEventListener('click',tryUnlock);
+$('backLock').addEventListener('click',()=>{stopGiftMusic();showScreen('lockScreen');});
+$('backFlowers').addEventListener('click',()=>{stopGiftMusic();showScreen('flowerScreen');});$('backBouquet').addEventListener('click',()=>{stopGiftMusic();showScreen('bouquetScreen');});
+$('finishSelection').addEventListener('click',()=>{renderBouquet();showScreen('bouquetScreen');});
+// [NHẠC NỀN MỤC 4] Chỉ cấu hình và điều khiển audio trong màn hình lời chúc.
+const giftMusic = $('giftMusic');
+const musicToggle = $('musicToggle');
+const musicStatus = $('musicStatus');
+giftMusic.volume = Math.max(0, Math.min(1, Number(BACKGROUND_MUSIC_VOLUME) || 0));
+function stopGiftMusic(){giftMusic.pause();giftMusic.currentTime=0;musicToggle.textContent='▶ Bật nhạc nền';}
+function setupGiftMusic(){
+ const src=imageSource(BACKGROUND_MUSIC_URL);
+ if(!src){giftMusic.removeAttribute('src');giftMusic.load();musicToggle.disabled=true;musicToggle.textContent='♫ Chưa cài nhạc';musicStatus.textContent='Thêm URL nhạc tại BACKGROUND_MUSIC_URL trong phần CẤU HÌNH.';return;}
+ musicToggle.disabled=false;
+ if(giftMusic.getAttribute('src')!==src){giftMusic.src=src;giftMusic.load();}
+ musicToggle.textContent='▶ Bật nhạc nền';musicStatus.textContent='Nhạc chỉ phát trong phần ảnh và lời chúc.';
+}
+async function playGiftMusic(){
+ if(!imageSource(BACKGROUND_MUSIC_URL)){setupGiftMusic();return;}
+ try{await giftMusic.play();musicToggle.textContent='Ⅱ Tạm dừng nhạc';musicStatus.textContent='Đang phát nhạc nền ♡';}
+ catch(e){musicToggle.textContent='▶ Bật nhạc nền';musicStatus.textContent='Nếu nhạc chưa tự phát, hãy chạm nút Bật nhạc nền.';}
+}
+function enterGiftScreen(){renderGiftPhoto();setupGiftMusic();showScreen('giftScreen');if(imageSource(BACKGROUND_MUSIC_URL))playGiftMusic();}
+$('musicToggle').addEventListener('click',()=>{if(giftMusic.paused)playGiftMusic();else{giftMusic.pause();musicToggle.textContent='▶ Tiếp tục nhạc';musicStatus.textContent='Nhạc đang tạm dừng.';}});
+giftMusic.addEventListener('ended',()=>{musicToggle.textContent='▶ Bật nhạc nền';});
+$('finishBouquet').addEventListener('click',enterGiftScreen);
+$('celebrate').addEventListener('click',()=>{const root=$('hearts'),symbols=['💩','🤮'];for(let i=0;i<22;i++){const el=document.createElement('span');el.textContent=symbols[Math.floor(Math.random()*symbols.length)];el.style.cssText=`position:fixed;left:${Math.random()*100}%;bottom:-35px;font-size:${16+Math.random()*22}px;animation:rise 3.5s ${Math.random()*.7}s ease-out forwards;pointer-events:none;z-index:5`;root.appendChild(el);setTimeout(()=>el.remove(),4500);}});const st=document.createElement('style');st.textContent='@keyframes rise{to{transform:translateY(-110vh) rotate(30deg);opacity:0}}';document.head.appendChild(st);renderPinDots();renderFlowers();renderBouquet();
+</script></body></html>
